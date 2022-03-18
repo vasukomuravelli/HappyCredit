@@ -15,6 +15,7 @@ export const HomePage = () => {
     const [results, setResults] = React.useState([]);
     const [filter, setFilter] = React.useState([]);
     const [preferred, setPreferred] = React.useState([]);
+    const navigate = useNavigate();
     React.useEffect(() => {
         setIsLoading(true);
         axios.get("http://localhost:2345/products").then((res) => {
@@ -39,13 +40,16 @@ export const HomePage = () => {
             let a = data.filter((e) => {
                 return e.Title.toLowerCase().includes(search)
             });
+            navigate(`/query=${search}`);
             setResults(a);            
         } else {
             setResults([]);
+            navigate(`/`);
         }
     },[data,search])
 
     const handleDeal = (product) => {
+        navigate(`/deal=${product._id}`);
         setDeal(product);
     }
     const handleChange = (e) => {
@@ -53,9 +57,11 @@ export const HomePage = () => {
         if (e.target.checked) {
             let a = data.filter((e) => {
                 return e.Coupon;
-            })
+            });
+            navigate("/?coupon=true");
             setFilter(a)
         } else {
+            navigate("/");
             setFilter([]);            
         }
     }
