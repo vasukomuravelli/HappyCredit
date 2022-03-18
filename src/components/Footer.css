@@ -1,0 +1,44 @@
+.footer {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  padding: 3% 3% 5% 3%;
+  color: #fff;
+  background-color: black;
+  text-align: left;
+}
+.footerlogo {
+  margin-top: 1.5em;
+}
+.select {
+  width: 75%;
+  margin: 1em 0;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+.select:focus {
+  outline: none;
+}
+.apps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 73%;
+}
+.socialapps {
+  font-size: 2rem;
+}
+.footerbottom {
+  display: flex;
+  font-size: 10px;
+  justify-content: space-around;
+  text-align: left;
+  color: #fff;
+  background-color: black;
+}
+.footerbottom > p:nth-child(1) {
+  width: 50%;
+}
+.footer p:hover {
+  cursor: pointer;
+  color: rgb(38, 122, 156);
+}
