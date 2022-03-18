@@ -1,6 +1,6 @@
 .dashboard {
   text-align: left;
-  padding: 3em 0 0 3em;
+  padding: 5em 0 0 3em;
 }
 .banner {
   background-color: rgb(209, 226, 255);
@@ -15,11 +15,13 @@
 .banner div {
   display: flex;
   align-items: center;
-  width: 50%;
+  justify-content: center;
+  width: 60%;
 }
-.banner .close {
+.banner .closer {
   margin-left: 22%;
   cursor: pointer;
+  font-size: 2em;
 }
 .extension {
   font-weight: 500;
@@ -28,4 +30,56 @@
   cursor: pointer;
   display: flex;
   color: rgb(38, 122, 156);
+}
+@media (max-width: 1000px) {
+  .banner {
+    margin-right: 10%;
+    width: 80%;
+  }
+  .banner div {
+    width: 75%;
+  }
+  .banner .closer {
+    margin-left: 12%;
+  }
+}
+@media (max-width: 768px) {
+  .dashboard {
+    text-align: center;
+  }
+  .banner {
+    margin-right: 10%;
+    width: 80%;
+    justify-content: space-between;
+  }
+  .banner div p {
+    margin: 0.5em 0;
+  }
+  .banner div {
+    text-align: center;
+    display: block;
+    width: 80%;
+  }
+  .banner .closer {
+    margin-left: 10%;
+  }
+}
+@media (max-width: 600px) {
+  .dashboard {
+    text-align: left;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  .banner {
+    margin-right: 7%;
+    width: 94%;
+    box-sizing: border-box;
+    justify-content: space-around;
+    padding: 10px 10px;
+  }
+  .banner .closer {
+    margin-left: 5%;
+    cursor: pointer;
+  }
 }

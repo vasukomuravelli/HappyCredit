@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineSearch, AiOutlineDown,AiOutlineClose } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineDown,AiOutlineClose,AiOutlineUp } from "react-icons/ai";
 import "./Homepage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,8 @@ export const HomePage = () => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [deal, setDeal] = React.useState({});
     const [extraOptions, setExtraOptions] = React.useState(true);
+    const [showfilters,setShowfilters] = React.useState(false);
+    const [showdiscounts,setShowdiscounts] = React.useState(false);
     React.useEffect(() => {
         setIsLoading(true);
         axios.get("http://localhost:2345/products").then((res) => {
@@ -46,12 +48,12 @@ export const HomePage = () => {
                     </div>}
                 </div>
                 <hr />
-                <h3>Filter</h3>
-                <div className="hideOptions">
+                <h3 className="filter">Filter</h3>
+                <div className="hideOptions" onClick={() =>setShowfilters(!showfilters)}>
                     <h4>Types</h4>
-                    <AiOutlineDown />
+                    {showfilters ? <AiOutlineDown/>  : <AiOutlineUp />}
                 </div>
-                {<div className="options">
+                {showfilters && <div className="options">
                     <div>
                         <input type="checkbox" />
                         <p>Only Coupons</p>
@@ -66,11 +68,11 @@ export const HomePage = () => {
                     </div>
                 </div>}
                 <hr />
-                <div className="hideOptions">
+                <div className="hideOptions" onClick={() =>setShowdiscounts(!showdiscounts)}>
                     <h4>Discount</h4>
-                    <AiOutlineDown/>
+                    {showdiscounts ?  <AiOutlineDown/>  : <AiOutlineUp />}
                 </div>
-                {<div className="options">
+                { showdiscounts && <div className="options">
                     <div>
                         <input type="checkbox" />
                         <p>0-49% off</p>

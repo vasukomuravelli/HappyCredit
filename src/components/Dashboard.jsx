@@ -13,7 +13,7 @@ export const Dashboard = () => {
                     <p>Pay in 4 anywhere with the Chrome extension. </p>
                     <u className="extension"> Add to Chrome </u>
                 </div>
-                <AiOutlineClose onClick={() => setShowbanner(false)} className="close"/>
+                <AiOutlineClose onClick={() => setShowbanner(false)} className="closer"/>
             </div>}
         </div>
     )
