@@ -5,6 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 export const Navbar = () => {
     const [showshop, setShowshop] = React.useState(false);
     const [showhelp, setShowhelp] = React.useState(false);
+    const [showmenu,setShowmenu] = React.useState(false);
     return (
         <>
         <div className="navbar">
@@ -13,7 +14,7 @@ export const Navbar = () => {
                 <div className="navbarOptions">
                     <div onMouseEnter={()=>setShowshop(true)} onMouseLeave={()=>setShowshop(false)}>
                         <p style={{fontWeight:500}}>Shop</p>
-                        {showshop ? <div className="dropdown">
+                        {showshop  ? <div className="dropdown">
                         <div>
                             <h3>Deals</h3>
                             <h3>Trends</h3>
@@ -45,19 +46,28 @@ export const Navbar = () => {
                     <p>How it works</p>
                     <p>Pay in 4</p>
                     <p>The shopping app</p>
-                    <p onMouseEnter={()=>setShowhelp(true)} onMouseLeave={()=>setShowhelp(false)}>Help</p>
+                    <div onMouseEnter={()=>setShowhelp(true)} onMouseLeave={()=>setShowhelp(false)}>
+                        <p style={{fontWeight:500}}>Help</p>
+                        { showhelp && <div className="dropdown" >
+                                        <p>Customer support</p>
+                                        <p>Business support</p>
+                                        <p>Operational status</p>
+                                    </div>}                            
+                    </div>    
                 </div>
             </div>
             <div className="navbar-right">
                 <button>Log in</button>
                 <button>Get the app</button>
-                <GiHamburgerMenu className="hamburger"/>
+                    <GiHamburgerMenu className="hamburger" onClick={()=>setShowmenu(!showmenu)}/>
             </div>
-            </div>                        
-            { showhelp ? <div className="dropdown" >
-                            <p>Customer support</p>
-                            <p>Business support</p>
-                            <p>Operational status</p>
-                        </div> : null}
+            {showmenu && <div className="showMenu">
+                <p>Shop</p>
+                <p>How it works</p>
+                <p>Pay in 4</p>
+                <p>The shopping app</p>
+                <p>Help</p>
+            </div>}
+        </div>                        
     </>)
 }

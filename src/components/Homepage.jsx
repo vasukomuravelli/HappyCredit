@@ -10,7 +10,11 @@ export const HomePage = () => {
     const [deal, setDeal] = React.useState({});
     const [extraOptions, setExtraOptions] = React.useState(true);
     const [showfilters,setShowfilters] = React.useState(false);
-    const [showdiscounts,setShowdiscounts] = React.useState(false);
+    const [showdiscounts, setShowdiscounts] = React.useState(false);
+    const [search, setSearch] = React.useState("");
+    const [results, setResults] = React.useState([]);
+    const [filter, setFilter] = React.useState([]);
+    const [preferred, setPreferred] = React.useState([]);
     React.useEffect(() => {
         setIsLoading(true);
         axios.get("http://localhost:2345/products").then((res) => {
@@ -19,9 +23,41 @@ export const HomePage = () => {
         });
     }, []);
 
+    React.useEffect(() => {
+        if (filter.length && results.length) {
+            let a = results.filter((e)=>e.Coupon);            
+            console.log(a);
+            setPreferred(a);
+        }
+        else {
+            results.length ? setPreferred(results) : filter.length ? setPreferred(filter) : setPreferred(data);            
+        }
+    }, [results, filter, data]);
+    
+    React.useEffect(() => {
+        if (search.length > 0) {
+            let a = data.filter((e) => {
+                return e.Title.toLowerCase().includes(search)
+            });
+            setResults(a);            
+        } else {
+            setResults([]);
+        }
+    },[data,search])
+
     const handleDeal = (product) => {
         setDeal(product);
-        console.log(deal);
+    }
+    const handleChange = (e) => {
+        
+        if (e.target.checked) {
+            let a = data.filter((e) => {
+                return e.Coupon;
+            })
+            setFilter(a)
+        } else {
+            setFilter([]);            
+        }
     }
     return (
     <div>
@@ -55,7 +91,7 @@ export const HomePage = () => {
                 </div>
                 {showfilters && <div className="options">
                     <div>
-                        <input type="checkbox" />
+                        <input type="checkbox" onChange={handleChange} />
                         <p>Only Coupons</p>
                     </div>
                     <div>
@@ -86,10 +122,10 @@ export const HomePage = () => {
             <div>
                 <div className="search">
                     <AiOutlineSearch  className="searchicon"/>
-                    <input type="text" placeholder="search" />
+                        <input type="text" placeholder="Search in lowercase" onChange={(e)=>setSearch(e.target.value)}/>
                 </div>
                 <div className="prodContainer">
-                    {isLoading ? <div>...Loading</div> :  data.map((e) => {
+                    {isLoading ? <div>...Loading</div> :  preferred.map((e) => {
                         return (
                             <div key={e._id} onClick={()=>handleDeal(e)}>
                                 <img src={e.Image} alt={e.Title} />

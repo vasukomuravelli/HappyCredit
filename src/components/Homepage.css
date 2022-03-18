@@ -82,7 +82,7 @@
 }
 .offer {
   position: absolute;
-  bottom: 5%;
+  bottom: 17%;
   left: 5%;
 }
 .offer div {
@@ -178,6 +178,7 @@
     grid-gap: 1%;
     text-align: left;
     margin-top: 4em;
+    padding-bottom: 5%;
   }
 }
 @media (max-width: 1000px) {
@@ -225,6 +226,8 @@
     grid-gap: 1%;
     text-align: left;
     margin-top: 4em;
+    padding-bottom: 15%;
+    grid-auto-rows: minmax(100px, auto);
   }
   .popup {
     max-height: 84%;
