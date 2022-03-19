@@ -16,7 +16,6 @@ export const HomePage = () => {
     const [results, setResults] = React.useState([]);
     const [filter, setFilter] = React.useState([]);
     const [preferred, setPreferred] = React.useState([]);
-    // const divRef = React.useRef();
     const navigate = useNavigate();
     React.useEffect(() => {
         setIsLoading(true);
@@ -75,6 +74,9 @@ export const HomePage = () => {
             navigate("/");
             setFilter([]);            
         }
+    }
+    const copycode = (value) => {
+        window.navigator.clipboard.writeText(value);
     }
     return (
     <div>
@@ -179,7 +181,7 @@ export const HomePage = () => {
                     <h2>{deal.Tag}</h2>
                     <p>{deal.Description}</p>
                     <h4 style={{display : deal.Code ? "block" : "none"}}>{deal?.Code}</h4>
-                    <h5>{deal.Code ? "Copy code and shop" : "Shop deal"}</h5>
+                    {deal.Code ? <h5 onClick={()=>copycode(deal.Code)}>Copy code and shop</h5> : <h5 onClick={copycode}>Shop deal</h5>}
                 </div>
         </div>}    
     </div>
