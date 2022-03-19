@@ -232,6 +232,9 @@
   .popup {
     max-height: 84%;
   }
+  .offer {
+    bottom: -28%;
+  }
 }
 
 @media (max-width: 600px) {

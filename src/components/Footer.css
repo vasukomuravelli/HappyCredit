@@ -43,3 +43,12 @@
   cursor: pointer;
   color: rgb(38, 122, 156);
 }
+@media (max-width: 768px) {
+  .footer {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer p {
+    display: none;
+  }
+}

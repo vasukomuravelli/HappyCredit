@@ -12,14 +12,16 @@ export const HomePage = () => {
     const [showfilters,setShowfilters] = React.useState(false);
     const [showdiscounts, setShowdiscounts] = React.useState(false);
     const [search, setSearch] = React.useState("");
+    // const [page, setPage] = React.useState(1);
     const [results, setResults] = React.useState([]);
     const [filter, setFilter] = React.useState([]);
     const [preferred, setPreferred] = React.useState([]);
+    // const divRef = React.useRef();
     const navigate = useNavigate();
     React.useEffect(() => {
         setIsLoading(true);
-        axios.get("http://localhost:2345/products").then((res) => {
-            setData(res.data.product)
+        axios.get(`http://localhost:2345/products/`).then((res) => {
+            setData([...data,...res.data.product])
             setIsLoading(false);
         });
     }, []);
@@ -31,7 +33,7 @@ export const HomePage = () => {
             setPreferred(a);
         }
         else {
-            results.length ? setPreferred(results) : filter.length ? setPreferred(filter) : setPreferred(data);            
+            results.length ? setPreferred(results) : filter.length ? setPreferred(filter) : setPreferred([...data]);            
         }
     }, [results, filter, data]);
     
@@ -41,12 +43,21 @@ export const HomePage = () => {
                 return e.Title.toLowerCase().includes(search)
             });
             navigate(`/query=${search}`);
-            setResults(a);            
+            setResults(a);
         } else {
             setResults([]);
             navigate(`/`);
         }
-    },[data,search])
+    }, [data, search]);
+
+    // const scroll = () => {
+    //     if (
+    //       divRef.current.scrollTop + divRef.current.clientHeight >
+    //       divRef.current.scrollHeight - 5
+    //     ) {
+    //       setPage((page) => page + 1);
+    //     }
+    // };
 
     const handleDeal = (product) => {
         navigate(`/deal=${product._id}`);
@@ -131,17 +142,17 @@ export const HomePage = () => {
                         <input type="text" placeholder="Search in lowercase" onChange={(e)=>setSearch(e.target.value)}/>
                 </div>
                 <div className="prodContainer">
-                    {isLoading ? <div>...Loading</div> :  preferred.map((e) => {
+                        {isLoading ? <div>...Loading</div> : preferred.map((e) => {
                         return (
                             <div key={e._id} onClick={()=>handleDeal(e)}>
                                 <img src={e.Image} alt={e.Title} />
                                 <h3>{e.Title}</h3>
                                 <p>{e.Tag}</p>
                                 <div className="offer">
-                                    <p>{e.Offer.split(' ')[0]}</p>
+                                    <p>{e.Offer?.split(' ')[0]}</p>
                                     <div>
-                                        <p>{e.Offer.split(' ')[1]}</p>
-                                        <p>{e.Offer.split(' ')?.[2]}</p>
+                                        <p>{e.Offer?.split(' ')[1]}</p>
+                                        <p>{e.Offer?.split(' ')?.[2]}</p>
                                     </div>
                                 </div>
                             </div>
