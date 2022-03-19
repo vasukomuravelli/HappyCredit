@@ -195,6 +195,7 @@
   .category {
     display: flex;
     overflow-x: scroll;
+    margin-bottom: 30px;
   }
   .category p {
     width: auto;

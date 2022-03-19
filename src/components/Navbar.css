@@ -91,6 +91,7 @@
     display: block;
     font-size: 1.5rem;
     margin-top: 2px;
+    cursor: pointer;
   }
   .showMenu {
     display: flex;
@@ -107,5 +108,10 @@
     text-align: left;
     font-weight: bold;
     border-bottom: 1px solid rgba(2, 14, 15, 0.06);
+  }
+}
+@media (max-width: 768px) {
+  .navbar-right {
+    width: 50%;
   }
 }

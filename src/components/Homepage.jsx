@@ -20,7 +20,7 @@ export const HomePage = () => {
     const navigate = useNavigate();
     React.useEffect(() => {
         setIsLoading(true);
-        axios.get(`http://localhost:2345/products/`).then((res) => {
+        axios.get(`https://heppycredit.herokuapp.com/products/`).then((res) => {
             setData([...res.data.product])
             setIsLoading(false);
         });
