@@ -21,7 +21,7 @@ export const HomePage = () => {
     React.useEffect(() => {
         setIsLoading(true);
         axios.get(`http://localhost:2345/products/`).then((res) => {
-            setData([...data,...res.data.product])
+            setData([...res.data.product])
             setIsLoading(false);
         });
     }, []);
