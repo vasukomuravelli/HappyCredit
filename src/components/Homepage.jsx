@@ -179,7 +179,7 @@ export const HomePage = () => {
                     <h2>{deal.Tag}</h2>
                     <p>{deal.Description}</p>
                     <h4 style={{display : deal.Code ? "block" : "none"}}>{deal?.Code}</h4>
-                    <h5>Copy code and shop</h5>
+                    <h5>{deal.Code ? "Copy code and shop" : "Shop deal"}</h5>
                 </div>
         </div>}    
     </div>
